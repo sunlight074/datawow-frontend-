@@ -15,13 +15,13 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body>
+			<body className="bg-primary-gray-100 ">
 				<Navbar />
-				<div className="bg-primary-gray-100 h-screen flex flex-row p-5 lg:p-10">
-					<div className="hidden lg:block lg:w-1/4">
+				<div className="w-full h-full flex flex-row p-5 lg:p-10">
+					<div className="hidden lg:block lg:w-1/5">
 						<Sidebar />
 					</div>
-					<div className="w-full lg:w-3/4">{children}</div>
+					<div className="w-full lg:w-3/5">{children}</div>
 				</div>
 			</body>
 		</html>
