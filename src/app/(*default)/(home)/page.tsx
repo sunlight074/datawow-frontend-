@@ -1,3 +1,10 @@
+import InputInteractive from "@/components/InputInteractive";
+import SelectCommunity from "@/components/SelectCommunity";
+
 export default function Page() {
-	return <div>homepage</div>;
+	return (
+		<div>
+			<InputInteractive />
+		</div>
+	);
 }
