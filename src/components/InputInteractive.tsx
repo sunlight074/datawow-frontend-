@@ -13,7 +13,7 @@ import { CiSearch } from "react-icons/ci";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { debounce } from "lodash";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
@@ -108,53 +108,57 @@ export default function InputInteractive() {
 	}, [watch]);
 
 	return (
-		<form className="flex items-center space-x-3">
-			<div className="flex-1">
-				<div className="relative">
-					<div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">
-						<CiSearch />
-					</div>
-					<Controller
-						control={control}
-						name="search"
-						render={({ field: { onChange, value } }) => (
-							<Input
-								placeholder="Search"
-								className="pl-10"
-								onFocus={() => setIsFocused(true)}
-								onBlur={() => setIsFocused(false)}
-								onChange={onChange}
-								value={value}
-							/>
-						)}
-					/>
-				</div>
-			</div>
-			<Controller
-				control={control}
-				name="community"
-				render={({ field: { onChange, value } }) => (
-					<Select>
-						<SelectTrigger className="w-[180px]">
-							<SelectValue placeholder="Community" />
-						</SelectTrigger>
-						<SelectContent>
-							{mockData.map((item, index) => (
-								<SelectItem
-									key={`${item.id}-${index}`}
-									value={item.id}
+		<Suspense>
+			<form className="flex items-center space-x-3">
+				<div className="flex-1">
+					<div className="relative">
+						<div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">
+							<CiSearch />
+						</div>
+						<Controller
+							control={control}
+							name="search"
+							render={({ field: { onChange, value } }) => (
+								<Input
+									placeholder="Search"
+									className="pl-10"
+									onFocus={() => setIsFocused(true)}
+									onBlur={() => setIsFocused(false)}
 									onChange={onChange}
-									className={clsx({ "bg-primary-green-100": item.id === "1" })}
-								>
-									{item.value}
-								</SelectItem>
-							))}
-						</SelectContent>
-					</Select>
-				)}
-			/>
+									value={value}
+								/>
+							)}
+						/>
+					</div>
+				</div>
+				<Controller
+					control={control}
+					name="community"
+					render={({ field: { onChange, value } }) => (
+						<Select>
+							<SelectTrigger className="w-[180px]">
+								<SelectValue placeholder="Community" />
+							</SelectTrigger>
+							<SelectContent>
+								{mockData.map((item, index) => (
+									<SelectItem
+										key={`${item.id}-${index}`}
+										value={item.id}
+										onChange={onChange}
+										className={clsx({
+											"bg-primary-green-100": item.id === "1",
+										})}
+									>
+										{item.value}
+									</SelectItem>
+								))}
+							</SelectContent>
+						</Select>
+					)}
+				/>
 
-			<Button className="bg-primary-success">Create +</Button>
-		</form>
+				<Button className="bg-primary-success">Create +</Button>
+			</form>
+		</Suspense>
 	);
 }

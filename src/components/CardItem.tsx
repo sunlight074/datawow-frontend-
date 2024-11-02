@@ -1,5 +1,4 @@
 "use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import { FiMessageCircle } from "react-icons/fi";
@@ -23,7 +22,9 @@ export default function CardItem() {
 						width={30}
 						height={30}
 					/>
-					<p>name</p>
+					<p>
+						<Highlighter searchWords={normalSearch} textToHighlight="name" />
+					</p>
 				</div>
 				<div className="bg-gray-200 w-fit p-1 rounded-md text-sm">History</div>
 				<div className="w-full space-y-1">
