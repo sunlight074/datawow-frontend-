@@ -1,3 +1,4 @@
+"use client";
 import {
 	Select,
 	SelectContent,
@@ -5,7 +6,12 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
+import {
+	type CommunityListResult,
+	getCommunityList,
+} from "@/dataServices/api_get_community_list";
 import clsx from "clsx";
+import { use, useEffect, useState } from "react";
 
 type Props = {
 	className?: string;
@@ -22,36 +28,18 @@ export default function SelectCommunity({
 	placeholder = "Community",
 	onValueChange,
 }: Props) {
-	const mockData = [
-		{
-			id: "1",
-			value: "History",
-		},
-		{
-			id: "2",
-			value: "Food",
-		},
-		{
-			id: "3",
-			value: "Pets",
-		},
-		{
-			id: "4",
-			value: "Health",
-		},
-		{
-			id: "5",
-			value: "Fashion",
-		},
-		{
-			id: "6",
-			value: "Exercise",
-		},
-		{
-			id: "7",
-			value: "Others",
-		},
-	];
+	const [communityListResult, setCommunityListResult] =
+		useState<CommunityListResult[]>();
+
+	const fetchCommunityList = async () => {
+		const result = await getCommunityList();
+		setCommunityListResult(result);
+	};
+
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+	useEffect(() => {
+		fetchCommunityList();
+	}, []);
 
 	return (
 		<Select value={value} onValueChange={onValueChange}>
@@ -59,15 +47,15 @@ export default function SelectCommunity({
 				<SelectValue placeholder={placeholder} />
 			</SelectTrigger>
 			<SelectContent>
-				{mockData.map((item) => (
+				{communityListResult?.map((item) => (
 					<SelectItem
-						key={item.id}
-						value={item.id}
+						key={item.community_id}
+						value={item.community_id}
 						className={clsx({
-							"bg-primary-green-100": item.id === selectCommunity,
+							"bg-primary-green-100": item.community_id === selectCommunity,
 						})}
 					>
-						{item.value}
+						{item.community_name}
 					</SelectItem>
 				))}
 			</SelectContent>

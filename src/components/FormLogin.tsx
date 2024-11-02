@@ -1,6 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { authenticateUser } from "@/dataServices/api_login";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
@@ -29,7 +30,7 @@ export default function formLogin() {
 	});
 
 	const onSubmit = async (value: formValue) => {
-		router.push("/");
+		authenticateUser({ username: value.username });
 	};
 
 	return (

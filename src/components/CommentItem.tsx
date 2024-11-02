@@ -1,6 +1,11 @@
+import type { CommentResult } from "@/dataServices/api_get_comment_by_id.ts";
 import Image from "next/image";
 
-export default function CommentItem() {
+type Props = {
+	commentResult: CommentResult;
+};
+
+export default function CommentItem({ commentResult }: Props) {
 	return (
 		<div className="flex flex-col space-y-3 mb-7">
 			<div className="flex space-x-3 items-center">
@@ -11,16 +16,10 @@ export default function CommentItem() {
 					width={30}
 					height={30}
 				/>
-				<p className="font-medium">name</p>
-				<p className="text-primary-gray-100">12h ago</p>
+				<p className="font-medium">{commentResult.name}</p>
+				<p className="text-primary-gray-100">{commentResult.created_at} ago</p>
 			</div>
-			<p className="ml-10">
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt, illo
-				quia sapiente ipsa ab, tempore laborum nulla quod ullam, tenetur natus
-				odio commodi voluptatibus consectetur eligendi perferendis maxime
-				delectus! Dolores cupiditate facilis officiis iure provident molestiae
-				animi quidem blanditiis quia.
-			</p>
+			<p className="ml-10">{commentResult.description}</p>
 		</div>
 	);
 }
