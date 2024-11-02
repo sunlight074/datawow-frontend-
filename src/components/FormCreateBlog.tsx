@@ -33,6 +33,7 @@ export default function FormCreateBlog() {
 	const {
 		handleSubmit,
 		formState: { errors },
+		setValue,
 		control,
 	} = useForm<formValue>({
 		mode: "onSubmit",
@@ -47,6 +48,10 @@ export default function FormCreateBlog() {
 	const onSubmit = async (value: formValue) => {
 		console.log(value);
 		setOpen(true);
+
+		setValue("title", "");
+		setValue("description", "");
+		setValue("community", "");
 	};
 
 	return (

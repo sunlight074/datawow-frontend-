@@ -5,10 +5,10 @@ import { useMemo } from "react";
 import Highlighter from "react-highlight-words";
 import { FiMessageCircle } from "react-icons/fi";
 import { twMerge } from "tailwind-merge";
-import { RiDeleteBinLine } from "react-icons/ri";
 
 import FormCreateAndUpdateBlog from "./FormCreateBlog";
 import FormEditBlog from "./FormEditBlog";
+import DeleteDialog from "./DeleteDialog";
 
 type Props = {
 	classNameTitle?: string;
@@ -40,8 +40,8 @@ export default function EditCardItem({
 					<Highlighter searchWords={normalSearch} textToHighlight="name" />
 
 					<div className="flex space-x-3">
-						<FormEditBlog />
-						<RiDeleteBinLine className="w-5 h-5 text-primary-success" />
+						<FormEditBlog onChange={() => {}} />
+						<DeleteDialog onChange={() => {}} />
 					</div>
 				</div>
 			</div>

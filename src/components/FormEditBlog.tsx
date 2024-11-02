@@ -16,7 +16,7 @@ import SelectCommunity from "./SelectCommunity";
 import { z } from "zod";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
 
 const formSchema = z.object({
 	title: z.string().min(5, { message: "*Title must be at least 5 characters" }),
@@ -28,11 +28,16 @@ const formSchema = z.object({
 
 type formValue = z.infer<typeof formSchema>;
 
-export default function FormEditBlog() {
+type Props = {
+	onChange: (value: formValue) => void;
+};
+
+export default function FormEditBlog({ onChange }: Props) {
 	const [open, setOpen] = useState<boolean>(false);
 	const {
 		handleSubmit,
 		formState: { errors },
+		setValue,
 		control,
 	} = useForm<formValue>({
 		mode: "onSubmit",
@@ -46,20 +51,27 @@ export default function FormEditBlog() {
 
 	const onHandleSubmit = async (value: formValue) => {
 		setOpen(false);
+		onChange(value);
 	};
+
+	useEffect(() => {
+		setValue("title", "asdasdasd");
+		setValue("description", "asdasdasd");
+		setValue("community", "2");
+	}, [setValue]);
 
 	return (
 		<Dialog open={open}>
 			<DialogTrigger asChild>
 				<FiEdit3
-					className="w-5 h-5 text-primary-success"
+					className="w-5 h-5 text-primary-success cursor-pointer"
 					onClick={() => setOpen(true)}
 				/>
 			</DialogTrigger>
 			<DialogContent className="max-w-[380px] lg:max-w-[500px]">
 				<form onSubmit={handleSubmit(onHandleSubmit)}>
 					<DialogHeader>
-						<DialogTitle className="text-xl">Edit Post</DialogTitle>
+						<DialogTitle className="text-xl ">Edit Post</DialogTitle>
 						<DialogDescription />
 					</DialogHeader>
 					<div className="grid gap-4 py-4">
