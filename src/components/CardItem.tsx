@@ -5,8 +5,17 @@ import { FiMessageCircle } from "react-icons/fi";
 import Highlighter from "react-highlight-words";
 import { useSearchParams } from "next/navigation";
 import { useMemo } from "react";
+import { twMerge } from "tailwind-merge";
 
-export default function CardItem() {
+type Props = {
+	classNameTitle?: string;
+	classNameDescription?: string;
+};
+
+export default function CardItem({
+	classNameDescription,
+	classNameTitle,
+}: Props) {
 	const searchParams = useSearchParams();
 	const search = searchParams.get("search");
 
@@ -31,20 +40,17 @@ export default function CardItem() {
 				</div>
 				<div className="bg-gray-200 w-fit p-1 rounded-md text-sm">History</div>
 				<div className="w-full space-y-1">
-					<h2 className="font-bold">
+					<h2 className={twMerge("font-bold", classNameTitle)}>
 						<Highlighter
 							searchWords={normalSearch}
 							textToHighlight="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fuga,
 						laudantium."
 						/>
 					</h2>
-					<p className="line-clamp-2">
+					<p className={twMerge("line-clamp-2", classNameDescription)}>
 						<Highlighter
 							searchWords={normalSearch}
-							textToHighlight="Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
-						illum minus nemo assumenda exercitationem commodi maxime, accusamus
-						quasi a laboriosam vero illo cupiditate soluta reiciendis earum
-						praesentium est impedit! Dicta."
+							textToHighlight="Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium, iure adipisci! Consequuntur, modi? Dolor quidem suscipit unde asperiores esse architecto exercitationem pariatur facilis similique nostrum. Illum dicta animi quam eaque neque tempore velit. Commodi voluptate soluta amet illum perspiciatis tempore."
 						/>
 					</p>
 				</div>
