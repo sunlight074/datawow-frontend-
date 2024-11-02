@@ -1,5 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import { FiEdit3 } from "react-icons/fi";
 import {
 	Dialog,
 	DialogContent,
@@ -27,7 +28,7 @@ const formSchema = z.object({
 
 type formValue = z.infer<typeof formSchema>;
 
-export default function FormCreatePost() {
+export default function FormEditBlog() {
 	const [open, setOpen] = useState<boolean>(false);
 	const {
 		handleSubmit,
@@ -43,24 +44,22 @@ export default function FormCreatePost() {
 		},
 	});
 
-	const onSubmit = async (value: formValue) => {
+	const onHandleSubmit = async (value: formValue) => {
 		setOpen(false);
 	};
 
 	return (
 		<Dialog open={open}>
 			<DialogTrigger asChild>
-				<Button
-					className="bg-primary-success hover:bg-primary-success"
+				<FiEdit3
+					className="w-5 h-5 text-primary-success"
 					onClick={() => setOpen(true)}
-				>
-					Create +
-				</Button>
+				/>
 			</DialogTrigger>
 			<DialogContent className="max-w-[380px] lg:max-w-[500px]">
-				<form onSubmit={handleSubmit(onSubmit)}>
+				<form onSubmit={handleSubmit(onHandleSubmit)}>
 					<DialogHeader>
-						<DialogTitle className="text-xl">Create Post</DialogTitle>
+						<DialogTitle className="text-xl">Edit Post</DialogTitle>
 						<DialogDescription />
 					</DialogHeader>
 					<div className="grid gap-4 py-4">
@@ -128,7 +127,7 @@ export default function FormCreatePost() {
 							type="submit"
 							className="bg-primary-success hover:bg-primary-success w-full lg:w-[6.5rem]"
 						>
-							post
+							confirm
 						</Button>
 					</DialogFooter>
 				</form>

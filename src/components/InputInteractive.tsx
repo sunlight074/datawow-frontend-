@@ -7,8 +7,8 @@ import { Controller, useForm } from "react-hook-form";
 import { Suspense, useEffect, useState } from "react";
 import { debounce } from "lodash";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import FormCreatePost from "./FormCreatePost";
 import SelectCommunity from "./SelectCommunity";
+import FormCreateBlog from "./FormCreateBlog";
 
 const formSchema = z.object({
 	search: z.string(),
@@ -111,7 +111,7 @@ export default function InputInteractive() {
 								/>
 							)}
 						/>
-						<FormCreatePost />
+						<FormCreateBlog />
 					</>
 				)}
 			</div>
