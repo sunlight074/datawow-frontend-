@@ -1,5 +1,6 @@
 import CardItem from "@/components/CardItem";
 import CommentItem from "@/components/CommentItem";
+import FromCreateComment from "@/components/FromCreateComment";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa6";
@@ -11,17 +12,18 @@ export default function Page() {
 					<FaArrowLeft />
 				</div>
 			</Link>
+
 			<div className="w-full mt-10">
 				<CardItem
 					classNameTitle="text-2xl mb-3"
 					classNameDescription="line-clamp-none"
 				/>
 			</div>
+
 			<div className="w-full mt-7">
-				<Button className="bg-primary-white text-primary-success hover:bg-primary-white border border-primary-success font-semibold">
-					Add Comments
-				</Button>
+				<FromCreateComment />
 			</div>
+
 			<div className="w-full mt-10">
 				{Array.from({ length: 6 }, (_, index) => (
 					// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
