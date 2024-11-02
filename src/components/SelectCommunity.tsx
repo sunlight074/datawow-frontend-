@@ -10,6 +10,7 @@ import clsx from "clsx";
 type Props = {
 	className?: string;
 	value?: string;
+	placeholder?: string;
 	selectCommunity?: string;
 	onValueChange?(value: string): void;
 };
@@ -18,6 +19,7 @@ export default function SelectCommunity({
 	className,
 	value,
 	selectCommunity,
+	placeholder = "Community",
 	onValueChange,
 }: Props) {
 	const mockData = [
@@ -54,7 +56,7 @@ export default function SelectCommunity({
 	return (
 		<Select value={value} onValueChange={onValueChange}>
 			<SelectTrigger className={`${className} w-[120px] lg:w-[180px]`}>
-				<SelectValue placeholder="Community" />
+				<SelectValue placeholder={placeholder} />
 			</SelectTrigger>
 			<SelectContent>
 				{mockData.map((item) => (

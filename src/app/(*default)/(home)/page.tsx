@@ -11,7 +11,6 @@ export default function Page() {
 					// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
 					<div key={index}>
 						<CardItem />
-
 						{index !== 6 && <hr className="mt-5" />}
 					</div>
 				))}
