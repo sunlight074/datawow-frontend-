@@ -5,7 +5,7 @@ import Highlighter from "react-highlight-words";
 import { useSearchParams } from "next/navigation";
 import { useMemo } from "react";
 import { twMerge } from "tailwind-merge";
-import type { BlogListResult } from "@/dataServices/api_get_blog_list.tsx";
+import type { BlogListResult } from "@/dataServices/api_get_blog_list";
 
 type Props = {
 	classNameTitle?: string;

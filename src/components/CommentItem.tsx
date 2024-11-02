@@ -1,4 +1,4 @@
-import type { CommentResult } from "@/dataServices/api_get_comment_by_id.ts";
+import type { CommentResult } from "@/dataServices/api_get_comment_by_id";
 import Image from "next/image";
 
 type Props = {

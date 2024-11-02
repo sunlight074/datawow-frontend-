@@ -1,6 +1,6 @@
 import CardItem from "@/components/CardItem";
 import InputInteractive from "@/components/InputInteractive";
-import { getBlogList } from "@/dataServices/api_get_blog_list.tsx";
+import { getBlogList } from "@/dataServices/api_get_blog_list";
 import Link from "next/link";
 import { Suspense } from "react";
 

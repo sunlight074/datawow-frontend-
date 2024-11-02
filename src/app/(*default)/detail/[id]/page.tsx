@@ -1,7 +1,7 @@
 import CardItem from "@/components/CardItem";
 import CommentItem from "@/components/CommentItem";
 import FromCreateComment from "@/components/FromCreateComment";
-import { getCommentById } from "@/dataServices/api_get_comment_by_id.ts";
+import { getCommentById } from "@/dataServices/api_get_comment_by_id";
 import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa6";
 export default async function Page({ params }: { params: { id: string } }) {
