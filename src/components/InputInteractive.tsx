@@ -1,14 +1,5 @@
 "use client";
-import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from "@/components/ui/select";
-import clsx from "clsx";
 import { Input } from "./ui/input";
-import { Button } from "./ui/button";
 import { CiSearch } from "react-icons/ci";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -16,6 +7,8 @@ import { Controller, useForm } from "react-hook-form";
 import { Suspense, useEffect, useState } from "react";
 import { debounce } from "lodash";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import FormCreatePost from "./FormCreatePost";
+import SelectCommunity from "./SelectCommunity";
 
 const formSchema = z.object({
 	search: z.string(),
@@ -39,36 +32,6 @@ export default function InputInteractive() {
 			search: "",
 		},
 	});
-	const mockData = [
-		{
-			id: "1",
-			value: "History",
-		},
-		{
-			id: "2",
-			value: "Food",
-		},
-		{
-			id: "3",
-			value: "Pets",
-		},
-		{
-			id: "4",
-			value: "Health",
-		},
-		{
-			id: "5",
-			value: "Fashion",
-		},
-		{
-			id: "6",
-			value: "Exercise",
-		},
-		{
-			id: "7",
-			value: "Others",
-		},
-	];
 
 	const updateQueryString = (paramsToUpdate: {
 		[name: string]: string | null | undefined;
@@ -97,7 +60,6 @@ export default function InputInteractive() {
 	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
 		const debouncedWatch = debounce((value) => {
-			console.log(value);
 			handleSearchParams(value);
 		}, 500);
 
@@ -111,7 +73,7 @@ export default function InputInteractive() {
 
 	return (
 		<Suspense>
-			<form className="flex items-center space-x-3">
+			<div className="flex items-center space-x-3">
 				<div className="flex-1">
 					<div className="relative">
 						<div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">
@@ -139,37 +101,20 @@ export default function InputInteractive() {
 							control={control}
 							name="community"
 							render={({ field: { onChange, value } }) => (
-								<Select
+								<SelectCommunity
 									value={value}
 									onValueChange={(value) => {
 										onChange(value);
 										setSelectCommunity(value);
 									}}
-								>
-									<SelectTrigger className="w-[120px] lg:w-[180px]">
-										<SelectValue placeholder="Community" />
-									</SelectTrigger>
-									<SelectContent>
-										{mockData.map((item) => (
-											<SelectItem
-												key={item.id}
-												value={item.id}
-												className={clsx({
-													"bg-primary-green-100": item.id === selectCommunity,
-												})}
-											>
-												{item.value}
-											</SelectItem>
-										))}
-									</SelectContent>
-								</Select>
+									selectCommunity={selectCommunity}
+								/>
 							)}
 						/>
-
-						<Button className="bg-primary-success">Create +</Button>
+						<FormCreatePost />
 					</>
 				)}
-			</form>
+			</div>
 		</Suspense>
 	);
 }
