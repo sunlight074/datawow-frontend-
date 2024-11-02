@@ -28,14 +28,15 @@ export default function InputInteractive() {
 	const router = useRouter();
 	const pathname = usePathname();
 	const searchParams = useSearchParams();
-	const [isFocused, setIsFocused] = useState(false);
+
+	const [isFocused, setIsFocused] = useState<boolean>(false);
+	const [selectCommunity, setSelectCommunity] = useState<string>();
 
 	const { watch, control } = useForm<formValue>({
-		mode: "onSubmit",
+		mode: "onChange",
 		resolver: zodResolver(formSchema),
 		defaultValues: {
 			search: "",
-			community: "History",
 		},
 	});
 	const mockData = [
@@ -96,6 +97,7 @@ export default function InputInteractive() {
 	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
 		const debouncedWatch = debounce((value) => {
+			console.log(value);
 			handleSearchParams(value);
 		}, 500);
 
@@ -131,33 +133,42 @@ export default function InputInteractive() {
 						/>
 					</div>
 				</div>
-				<Controller
-					control={control}
-					name="community"
-					render={({ field: { onChange, value } }) => (
-						<Select>
-							<SelectTrigger className="w-[180px]">
-								<SelectValue placeholder="Community" />
-							</SelectTrigger>
-							<SelectContent>
-								{mockData.map((item, index) => (
-									<SelectItem
-										key={`${item.id}-${index}`}
-										value={item.id}
-										onChange={onChange}
-										className={clsx({
-											"bg-primary-green-100": item.id === "1",
-										})}
-									>
-										{item.value}
-									</SelectItem>
-								))}
-							</SelectContent>
-						</Select>
-					)}
-				/>
+				{!isFocused && (
+					<>
+						<Controller
+							control={control}
+							name="community"
+							render={({ field: { onChange, value } }) => (
+								<Select
+									value={value}
+									onValueChange={(value) => {
+										onChange(value);
+										setSelectCommunity(value);
+									}}
+								>
+									<SelectTrigger className="w-[120px] lg:w-[180px]">
+										<SelectValue placeholder="Community" />
+									</SelectTrigger>
+									<SelectContent>
+										{mockData.map((item) => (
+											<SelectItem
+												key={item.id}
+												value={item.id}
+												className={clsx({
+													"bg-primary-green-100": item.id === selectCommunity,
+												})}
+											>
+												{item.value}
+											</SelectItem>
+										))}
+									</SelectContent>
+								</Select>
+							)}
+						/>
 
-				<Button className="bg-primary-success">Create +</Button>
+						<Button className="bg-primary-success">Create +</Button>
+					</>
+				)}
 			</form>
 		</Suspense>
 	);

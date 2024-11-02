@@ -4,15 +4,18 @@ import Link from "next/link";
 import { FiMessageCircle } from "react-icons/fi";
 import Highlighter from "react-highlight-words";
 import { useSearchParams } from "next/navigation";
+import { useMemo } from "react";
 
 export default function CardItem() {
 	const searchParams = useSearchParams();
 	const search = searchParams.get("search");
 
-	const normalSearch = search ? search.split(" ") : [];
+	const normalSearch = useMemo(() => {
+		return search ? search.split(" ") : [];
+	}, [search]);
 
 	return (
-		<Link href={"/"}>
+		<Link href={"/detail/:1"}>
 			<div className="flex flex-col space-y-3">
 				<div className="flex space-x-3 items-center">
 					<Image
