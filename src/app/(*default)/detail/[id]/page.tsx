@@ -4,8 +4,11 @@ import FromCreateComment from "@/components/FromCreateComment";
 import { getCommentById } from "@/dataServices/api_get_comment_by_id";
 import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa6";
-export default async function Page({ params }: { params: { id: string } }) {
-	const commentResult = await getCommentById({ id: params.id });
+
+type tParams = Promise<{ id: string }>;
+
+export default async function Page(props: { params: tParams }) {
+	const commentResult = await getCommentById({ id: (await props.params).id });
 
 	return (
 		<div className="w-full h-full ">
