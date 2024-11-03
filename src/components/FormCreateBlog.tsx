@@ -132,7 +132,7 @@ export default function FormCreateBlog() {
 							</p>
 						</div>
 					</div>
-					<DialogFooter className="flex flex-col lg:flex-row space-x-3">
+					<DialogFooter className="flex flex-col lg:flex-row gap-3">
 						<Button
 							type="button"
 							className="bg-primary-white hover:bg-primary-white  text-primary-success border border-primary-success w-full lg:w-[6.5rem]"
