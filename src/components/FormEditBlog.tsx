@@ -16,7 +16,8 @@ import SelectCommunity from "./SelectCommunity";
 import { z } from "zod";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import type { BlogListByAuthResult } from "@/dataServices/api_get_blog_list_by_auth";
 
 const formSchema = z.object({
 	title: z.string().min(5, { message: "*Title must be at least 5 characters" }),
@@ -26,20 +27,21 @@ const formSchema = z.object({
 	community: z.string().min(1, { message: "*Community is required" }),
 });
 
-type formValue = z.infer<typeof formSchema>;
+export type FormValue = z.infer<typeof formSchema>;
 
 type Props = {
-	onChange: (value: formValue) => void;
+	data: BlogListByAuthResult;
+	onChange: (value: FormValue) => void;
 };
 
-export default function FormEditBlog({ onChange }: Props) {
+export default function FormEditBlog({ data, onChange }: Props) {
 	const [open, setOpen] = useState<boolean>(false);
 	const {
 		handleSubmit,
 		formState: { errors },
 		setValue,
 		control,
-	} = useForm<formValue>({
+	} = useForm<FormValue>({
 		mode: "onSubmit",
 		resolver: zodResolver(formSchema),
 		defaultValues: {
@@ -49,16 +51,16 @@ export default function FormEditBlog({ onChange }: Props) {
 		},
 	});
 
-	const onHandleSubmit = async (value: formValue) => {
+	const onHandleSubmit = async (value: FormValue) => {
 		setOpen(false);
 		onChange(value);
 	};
 
 	useEffect(() => {
-		setValue("title", "asdasdasd");
-		setValue("description", "asdasdasd");
-		setValue("community", "2");
-	}, [setValue]);
+		setValue("title", data.blog_title);
+		setValue("description", data.blog_description);
+		setValue("community", data.community_id);
+	}, [setValue, data]);
 
 	return (
 		<Dialog open={open}>

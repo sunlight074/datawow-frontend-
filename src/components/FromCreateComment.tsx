@@ -13,6 +13,7 @@ import {
 	DialogTitle,
 	DialogDescription,
 } from "@/components/ui/dialog";
+import { createComment } from "@/dataServices/api_create_comment";
 
 const formSchema = z.object({
 	comment: z
@@ -40,9 +41,16 @@ export default function FromCreateComment() {
 	});
 
 	const onSubmit = async (value: formValue) => {
-		setOpenForDesktop(false);
-		setOpenForMobile(false);
-		setValue("comment", "");
+		try {
+			await createComment({
+				comment_description: value.comment,
+				userAccessToken: "",
+			});
+		} finally {
+			setOpenForDesktop(false);
+			setOpenForMobile(false);
+			setValue("comment", "");
+		}
 	};
 
 	const FormInput = ({ onCancel }: { onCancel: () => void }) => {

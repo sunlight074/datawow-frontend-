@@ -17,6 +17,7 @@ import { z } from "zod";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
+import { createBlog } from "@/dataServices/api_create_blog";
 
 const formSchema = z.object({
 	title: z.string().min(5, { message: "*Title must be at least 5 characters" }),
@@ -46,12 +47,21 @@ export default function FormCreateBlog() {
 	});
 
 	const onSubmit = async (value: formValue) => {
-		console.log(value);
-		setOpen(true);
-
-		setValue("title", "");
-		setValue("description", "");
-		setValue("community", "");
+		try {
+			await createBlog({
+				userAccessToken: "",
+				title: value.title,
+				content: value.description,
+				community_id: value.community,
+			});
+		} catch (e) {
+			console.log(e);
+		} finally {
+			setOpen(false);
+			setValue("title", "");
+			setValue("description", "");
+			setValue("community", "");
+		}
 	};
 
 	return (
