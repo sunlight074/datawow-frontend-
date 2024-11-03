@@ -30,7 +30,11 @@ export default function formLogin() {
 	});
 
 	const onSubmit = async (value: formValue) => {
-		authenticateUser({ username: value.username });
+		try {
+			await authenticateUser({ username: value.username });
+		} finally {
+			router.push("/");
+		}
 	};
 
 	return (

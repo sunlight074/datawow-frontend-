@@ -1,11 +1,10 @@
-import { redirect, RedirectType } from "next/navigation";
+"use server";
+import { setUserAccessToken } from "@/lib/user_access_token";
 
 export type LoginPayload = {
 	username: string;
 };
 
-export function authenticateUser(credentials: LoginPayload) {
-    localStorage.setItem("token", credentials.username);
-
-	redirect("/", RedirectType.push);
+export async function authenticateUser(credentials: LoginPayload) {
+	await setUserAccessToken(credentials.username);
 }

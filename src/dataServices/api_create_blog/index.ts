@@ -1,5 +1,6 @@
+import { getUserAccessToken } from "@/lib/user_access_token";
+
 export type CreateBlogParams = {
-	userAccessToken: string;
 	title: string;
 	content: string;
 	community_id: string;
@@ -9,12 +10,21 @@ type CreateBlogResult = {
 	success: boolean;
 };
 
-export function createBlog({
-	userAccessToken,
+export async function createBlog({
 	title,
 	content,
 	community_id,
 }: CreateBlogParams): Promise<CreateBlogResult> {
+	const userAccessToken = await getUserAccessToken();
+
+	if (userAccessToken) {
+		return new Promise((_, reject) => {
+			reject({
+				success: false,
+			});
+		});
+	}
+
 	return new Promise((resolve) => {
 		return resolve({
 			success: true,

@@ -4,7 +4,7 @@ import { getBlogListByAuth } from "@/dataServices/api_get_blog_list_by_auth";
 import { Suspense } from "react";
 
 export default async function Page() {
-	const getBlogListResult = await getBlogListByAuth({ userAccessToken: "" });
+	const getBlogListResult = await getBlogListByAuth();
 
 	if (!getBlogListResult) {
 		return <>no data</>;

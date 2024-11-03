@@ -1,3 +1,5 @@
+import { getUserAccessToken } from "@/lib/user_access_token";
+
 export type BlogListByAuthResult = {
 	blog_id: string;
 	blog_title: string;
@@ -9,13 +11,19 @@ export type BlogListByAuthResult = {
 	blog_created_by: string;
 };
 
-type Props = {
-	userAccessToken: string;
-};
+export async function getBlogListByAuth(): Promise<
+	BlogListByAuthResult[] | undefined
+> {
+	const userAccessToken = await getUserAccessToken();
 
-export function getBlogListByAuth({
-	userAccessToken,
-}: Props): Promise<BlogListByAuthResult[] | undefined> {
+	if (!userAccessToken) {
+		return new Promise((_, reject) => {
+			reject({
+				success: false,
+			});
+		});
+	}
+
 	return new Promise((resolve) => {
 		return resolve([
 			{

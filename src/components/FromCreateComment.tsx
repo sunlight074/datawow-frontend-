@@ -44,7 +44,6 @@ export default function FromCreateComment() {
 		try {
 			await createComment({
 				comment_description: value.comment,
-				userAccessToken: "",
 			});
 		} finally {
 			setOpenForDesktop(false);

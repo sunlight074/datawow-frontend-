@@ -49,7 +49,6 @@ export default function FormCreateBlog() {
 	const onSubmit = async (value: formValue) => {
 		try {
 			await createBlog({
-				userAccessToken: "",
 				title: value.title,
 				content: value.description,
 				community_id: value.community,

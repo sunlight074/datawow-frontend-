@@ -33,7 +33,6 @@ export default function EditCardItem({
 		try {
 			await deleteBlog({
 				blog_id: id,
-				userAccessToken: "",
 			});
 		} catch (error) {
 			console.log(error);
@@ -43,7 +42,6 @@ export default function EditCardItem({
 	const handleEdit = async (value: FormValue) => {
 		try {
 			await UpdateBlogById({
-				userAccessToken: "",
 				title: value.title,
 				content: value.description,
 				community_id: value.community,
