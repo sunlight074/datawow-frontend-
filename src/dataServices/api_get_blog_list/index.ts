@@ -15,7 +15,7 @@ export function getBlogList(): Promise<BlogListResult[] | undefined> {
 			{
 				blog_id: "1",
 				blog_title: "Test Blog",
-				blog_description: "Test Blog Description",
+				blog_description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
 				community_id: "1",
 				community_name: "Test Community",
 				comment_count: 5,
@@ -25,7 +25,7 @@ export function getBlogList(): Promise<BlogListResult[] | undefined> {
 			{
 				blog_id: "2",
 				blog_title: "Introduction to TypeScript",
-				blog_description: "A guide to getting started with TypeScript.",
+				blog_description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
 				community_id: "2",
 				community_name: "TypeScript Community",
 				comment_count: 10,
@@ -47,7 +47,7 @@ export function getBlogList(): Promise<BlogListResult[] | undefined> {
 				blog_id: "4",
 				blog_title: "Building REST APIs with Node.js",
 				blog_description:
-					"A comprehensive guide to building RESTful APIs with Node.js and Express.",
+					"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
 				community_id: "4",
 				community_name: "Node.js Enthusiasts",
 				comment_count: 3,
