@@ -2,11 +2,16 @@
 import { cookies } from "next/headers";
 
 export async function setUserAccessToken(token: string) {
-	const cookieStore = await cookies();
-	cookieStore.set("user_access_token", token);
+  const cookieStore = await cookies();
+  cookieStore.set("user_access_token", token);
 }
 
 export async function getUserAccessToken() {
-	const cookieStore = await cookies();
-	return cookieStore.get("user_access_token")?.value;
+  const cookieStore = await cookies();
+  return cookieStore.get("user_access_token")?.value;
+}
+
+export async function deleteUserAccessToken() {
+  const cookieStore = await cookies();
+  return cookieStore.delete("user_access_token");
 }
