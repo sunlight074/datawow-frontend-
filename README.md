@@ -1,4 +1,4 @@
-สามารถเล่นได้ที่ [คลิก](https://datawow-frontend.vercel.app/)  หรือ  https://datawow-frontend.vercel.app/
+สามารถเล่นได้ที่  [คลิก](https://datawow-frontend.vercel.app/)  หรือ  https://datawow-frontend.vercel.app/
 
 ## Getting Started
 
