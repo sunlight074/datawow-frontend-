@@ -18,7 +18,9 @@ export default async function Page() {
 				{getBlogListResult.map((blog, index) => (
 					<Link href={`/detail/${blog.blog_id}`} key={blog.blog_id}>
 						<CardItem result={blog} />
-						{index !== getBlogListResult.length - 1 && <hr className="mt-5" />}
+						{index !== getBlogListResult.length - 1 && (
+							<hr className="mt-5 mb-5" />
+						)}
 					</Link>
 				))}
 			</div>
